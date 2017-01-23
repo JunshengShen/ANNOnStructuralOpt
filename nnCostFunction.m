@@ -1,4 +1,4 @@
-function [j grand]=nnCostFunction(nn_params, input_layer_size, hidden_layer_size,num_labels, X, Y, lambda)
+function [J grand]=nnCostFunction(nn_params, input_layer_size, hidden_layer_size,num_labels, X, Y, lambda)
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
@@ -24,11 +24,31 @@ J=J+lambda/2/m*(Theta1_new(:)'*Theta1_new(:)+Theta2_new(:)'*Theta2_new(:));
 
 
 
+for i=1:m  
+    y_new=Y(i,:);  
+    a1=[1;X(i,:)'];  
+    a2=[1;sigmoid(Theta1*a1)];  
+    a3=sigmoid(Theta2*a2);  
+    det3=a3-y_new';  
+    det2=Theta2'*det3.*sigmoidGradient([1;Theta1*a1]);  
+    det2 = det2(2:end);   
+    Theta1_grad=Theta1_grad+det2*a1';  
+    Theta2_grad=Theta2_grad+det3*a2';  
+end  
+%step 3 and 4  
+Theta1_grad(:,1)=Theta1_grad(:,1)/m;  
+Theta1_grad(:,2:size(Theta1_grad,2))=Theta1_grad(:,2:size(Theta1_grad,2))/m+...  
+    lambda*Theta1(:,2:size(Theta1,2))/m;  
+Theta2_grad(:,1)=Theta2_grad(:,1)/m;  
+Theta2_grad(:,2:size(Theta2_grad,2))=Theta2_grad(:,2:size(Theta2_grad,2))/m+...  
+    lambda*Theta2(:,2:size(Theta2,2))/m;  
+%Implement backpropagation
 
 
 
+grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
 
+end
 
-grand=0;
-j=0;
+
