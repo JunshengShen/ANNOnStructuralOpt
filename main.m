@@ -17,23 +17,27 @@ Y=reshape(Y,m,400);
 %% ================ Part 2: Loading Parameters ================
 theta1=randn(400,401)./100;
 theta2=randn(400,401)./100;
-nn_params= [theta1(:) ; theta2(:)];% Unroll parameters 
+theta3=randn(400,401)./100;
+nn_params= [theta1(:) ; theta2(:);theta3(:)];% Unroll parameters 
 
 %% ================ Part 3: Compute Cost (Feedforward) ================
-lambda = 0;
+lambda = 1;
 num_labels=400;
+
+
 [J grad] = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
                    num_labels, X, Y, lambda);
+                   
 fprintf(['J= %f \n'], J);
 nn_params=nn_params-grad.*0.01;
 [J grad] = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
                    num_labels, X, Y, lambda);
 fprintf(['J= %f \n'], J); 
-for i=1:50
-  nn_params=nn_params-grad.*0.3;
+for i=1:500
+  nn_params=nn_params-grad.*0.001;
   [J grad] = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
                    num_labels, X, Y, lambda);
-  %fprintf(['J= %f \n'], J); 
+  fprintf(['J= %f \n'], J); 
 end
 fprintf(['J= %f \n'], J);
   
@@ -41,20 +45,28 @@ fprintf(['J= %f \n'], J);
   
   
   
-TESTX=load('trainingSetsX.txt');
+TESTX=load('test.txt');
 TESTX=TESTX'(:);
-TESTX=reshape(TESTX,m,400);
+TESTX=reshape(TESTX,1,400);
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
-Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):end), ...
+Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):(2*(hidden_layer_size * (input_layer_size + 1)))), ...
+                 hidden_layer_size, (hidden_layer_size + 1));
+Theta3 = reshape(nn_params((1 + 2*(hidden_layer_size * (input_layer_size + 1))):end), ...
                  num_labels, (hidden_layer_size + 1));
-a1 = [ones(m, 1) TESTX];  
+a1 = [ones(1, 1) TESTX]; 
+ 
 z2 = a1 * Theta1';  
 a2 = sigmoid(z2);  
-a2 = [ones(m, 1) a2];
+a2 = [ones(1, 1) a2];
+
 z3 = a2 * Theta2'; 
-h = sigmoid(z3);
+a3= sigmoid(z3);
+a3=[ones(1,1) a3];
+
+z4=a3 * Theta3'; 
+h = sigmoid(z4);
 h=reshape(h,20,20);
 h=h';
 imagesc(h),colorbar,colormap gray;
