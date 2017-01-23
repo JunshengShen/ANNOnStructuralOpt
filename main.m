@@ -12,7 +12,7 @@ Y=Y'(:);
 %imagesc(X),colorbar,colormap gray;
 m = size(X, 1)/400;%the number of traning examples
 X=reshape(X,m,400);
-
+Y=reshape(Y,m,400);
 
 %% ================ Part 2: Loading Parameters ================
 theta1=randn(400,401)./100;
