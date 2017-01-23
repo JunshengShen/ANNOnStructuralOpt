@@ -1,4 +1,4 @@
-function [J grand]=nnCostFunction(nn_params, input_layer_size, hidden_layer_size,num_labels, X, Y, lambda)
+function [J grad]=nnCostFunction(nn_params, input_layer_size, hidden_layer_size,num_labels, X, Y, lambda)
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
