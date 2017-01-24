@@ -11,17 +11,17 @@ Y=Y'(:);
 %imagesc(Y),colorbar,colormap gray;
 %imagesc(X),colorbar,colormap gray;
 m = size(X, 1)/400;%the number of traning examples
-X=reshape(X,m,400);
-Y=reshape(Y,m,400);
+X=(reshape(X,400,m))';
+Y=(reshape(Y,400,m))';
 
 %% ================ Part 2: Loading Parameters ================
-theta1=randn(400,401)./100;
-theta2=randn(400,401)./100;
-theta3=randn(400,401)./100;
+theta1=randn(400,401)./10;
+theta2=randn(400,401)./10;
+theta3=randn(400,401)./10;
 nn_params= [theta1(:) ; theta2(:);theta3(:)];% Unroll parameters 
 
 %% ================ Part 3: Compute Cost (Feedforward) ================
-lambda = 1;
+lambda = 0;
 num_labels=400;
 
 
@@ -34,7 +34,7 @@ nn_params=nn_params-grad.*0.01;
                    num_labels, X, Y, lambda);
 fprintf(['J= %f \n'], J); 
 for i=1:500
-  nn_params=nn_params-grad.*0.001;
+  nn_params=nn_params-grad.*0.01;
   [J grad] = nnCostFunction(nn_params, input_layer_size, hidden_layer_size, ...
                    num_labels, X, Y, lambda);
   fprintf(['J= %f \n'], J); 
@@ -47,7 +47,7 @@ fprintf(['J= %f \n'], J);
   
 TESTX=load('test.txt');
 TESTX=TESTX'(:);
-TESTX=reshape(TESTX,1,400);
+TESTX=(reshape(TESTX,400,1))';
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
 
