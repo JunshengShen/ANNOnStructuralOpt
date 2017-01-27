@@ -54,12 +54,15 @@ for i=1:m
     a5=sigmoid(Theta4*a4);
     det5=a5-y_new';  
     temp=z4(i,:)';
-    det4= Theta4(:,2:end)'*det5.*sigmoidGradient(Theta3*a3); 
+    det4= Theta4'*det5.*sigmoidGradient([1;Theta3*a3]); 
+    det4=det4(2:end);
     temp=z3(i,:)';
-    det3= Theta3(:,2:end)'*det4.*sigmoidGradient(Theta2*a2);  
+    det3= Theta3'*det4.*sigmoidGradient([1;Theta2*a2]);
+    det3=det3(2:end);
     temp=z2(i,:)';
-    det2= Theta2(:,2:end)'*det3.*sigmoidGradient(Theta1*a1);  %todo is et3(2:end) right?
-  
+    det2= Theta2'*det3.*sigmoidGradient([1;Theta1*a1]);  %todo is et3(2:end) right?
+    det2=det2(2:end);
+    
     Theta1_grad=Theta1_grad+det2*a1';  
     Theta2_grad=Theta2_grad+det3*a2';  
     Theta3_grad=Theta3_grad+det4*a3';
