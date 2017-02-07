@@ -1,0 +1,59 @@
+[33mcommit 08345add6a5a7c99536e3449cc7810144c01d0fe[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Tue Jan 24 19:43:00 2017 +0800
+
+    fix the reshape function wrong, add few training examples
+
+[33mcommit 297e23fb0efcc2bed4b6ec75e304c19b14fad6d0[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 22:16:08 2017 +0800
+
+    add some training examples, but the result isnt good. Maybe more features is needed
+
+[33mcommit 63f02903089a570a31222bf950981c0ce89bf08e[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 22:01:04 2017 +0800
+
+    added one layer, but the cost function seems cant convenrgence to near 0
+
+[33mcommit ea22fd8e8d9ef6996126c5b83709954bed6952bb[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 20:45:08 2017 +0800
+
+    Algorithm runs successfully with only one training example. Need more examples.
+
+[33mcommit ce778f049e4bae13ef211830d9db2f6d2b9787b5[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 19:33:25 2017 +0800
+
+    Implement backpropagation
+
+[33mcommit 83f978205eeacbf281d2ae5104d0d40859aa9707[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 19:19:14 2017 +0800
+
+    %Implement the cost function
+
+[33mcommit c2dfe11ec05407c6a0a12263128d5d2b07e4a556[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 16:14:15 2017 +0800
+
+    Implement forward propagation
+
+[33mcommit e2f29c1c4533c9861fcad31046dc9ba567d6763d[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 14:35:40 2017 +0800
+
+    add init parameters
+
+[33mcommit b7f080e8ecd9f26b2662594ee0febe9d89eba095[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 14:22:49 2017 +0800
+
+    add input
+
+[33mcommit 32b3db7dd713aad3719b680ecca4e30f2cad6504[m
+Author: JunshengShen <mrokelin@hotmail.com>
+Date:   Mon Jan 23 13:45:33 2017 +0800
+
+    init

@@ -2,11 +2,11 @@ function [J grad]=nnCostFunction(nn_params, input_layer_size, ...
   hidden_layer_size,num_labels, X, Y, lambda)
 Theta1 = reshape(nn_params(1:hidden_layer_size * (input_layer_size + 1)), ...
                  hidden_layer_size, (input_layer_size + 1));
-Theta2 = reshape(nn_params((1 + (hidden_layer_size * (input_layer_size + 1))):(2*(hidden_layer_size * (input_layer_size + 1)))), ...
+Theta2 = reshape(nn_params((1 + (hidden_layer_size * (hidden_layer_size + 1))):(2*(hidden_layer_size * (hidden_layer_size + 1)))), ...
                  hidden_layer_size, (hidden_layer_size + 1));
-Theta3 = reshape(nn_params((1 + 2*(hidden_layer_size * (input_layer_size + 1))):(3*(hidden_layer_size * (input_layer_size + 1)))), ...
+Theta3 = reshape(nn_params((1 + 2*(hidden_layer_size * (hidden_layer_size + 1))):(3*(hidden_layer_size * (hidden_layer_size + 1)))), ...
                  hidden_layer_size, (hidden_layer_size + 1));                
-Theta4 = reshape(nn_params((1 + 3*(hidden_layer_size * (input_layer_size + 1))):end), ...
+Theta4 = reshape(nn_params((1 + 2*(hidden_layer_size * (hidden_layer_size + 1))+hidden_layer_size * (input_layer_size + 1)):end), ...
                  num_labels, (hidden_layer_size + 1));
 m = size(X, 1);
 J = 0;
@@ -53,14 +53,14 @@ for i=1:m
     a4=[1;sigmoid(Theta3*a3)];
     a5=sigmoid(Theta4*a4);
     det5=a5-y_new';  
-    temp=z4(i,:)';
-    det4= Theta4'*det5.*sigmoidGradient([1;Theta3*a3]); 
+    %temp=z4(i,:)';
+    det4= Theta4'*det5.*sigmoidGradient(a4); 
     det4=det4(2:end);
-    temp=z3(i,:)';
-    det3= Theta3'*det4.*sigmoidGradient([1;Theta2*a2]);
+    %temp=z3(i,:)';
+    det3= Theta3'*det4.*sigmoidGradient(a3);
     det3=det3(2:end);
-    temp=z2(i,:)';
-    det2= Theta2'*det3.*sigmoidGradient([1;Theta1*a1]);  %todo is et3(2:end) right?
+    %temp=z2(i,:)';
+    det2= Theta2'*det3.*sigmoidGradient(a2);  %todo is et3(2:end) right?
     det2=det2(2:end);
     
     Theta1_grad=Theta1_grad+det2*a1';  
